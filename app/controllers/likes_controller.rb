@@ -7,21 +7,21 @@ class LikesController < ApplicationController
     # @post = Post.find(params[:post_id])
 
     if @like.save
-      redirect_to @like.post
+      redirect_to @like
     else
-      redirect_to posts_path, notice: "Something went wrong!"
+      redirect_to root_path, notice: "Something went wrong!"
     end
   end
 
 
   def destroy
     @like = current_user.likes.find(params[:id])
-    @post = @like.post
+    likeable = @like.likeable
 
     if @like.destroy
-      redirect_to @post
+      redirect_back(fallback_location: posts_url)
     else
-      redirect_to @post, notice: "Something went wrong!"
+      redirect_to root_path, notice: "Something went wrong!"
     end
   end
 
@@ -30,6 +30,6 @@ class LikesController < ApplicationController
   private
 
   def likes_params
-    params.require(:like).permit(:post_id)
+    params.require(:like).permit(:likeable_id, :likeable_type)
   end
 end
