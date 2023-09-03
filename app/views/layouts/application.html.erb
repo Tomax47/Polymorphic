@@ -22,7 +22,11 @@
   <p class="notice" style="color: green"><%= notice %></p>
   <p class="alert" style="color: green"><%= alert %></p>
 
-  <a>Welcome <%= current_user.email %></a>
+  <!--CHECKING WHO'S THE SIGNED IN USER 'FOR TESTING PURPOSES' -->
+  <% if user_signed_in? %>
+    <a>Welcome <%= current_user.email %></a>
+  <% end %>
+
   <%= yield %>
 </center>
 
