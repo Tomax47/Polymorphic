@@ -1,0 +1,16 @@
+<p>
+  <strong>By </strong>
+  <%= comment.user.email %>
+</p>
+
+<p>
+  <%= comment.content %>
+</p>
+
+<%if current_user.id == comment.user.id %>
+  <%= button_to 'Delete', post_comment_path(comment.post, comment), method: :delete %>
+<% end %>
+
+<hr />
+
+
