@@ -22,33 +22,7 @@
 
 <!-- LIKE SECTION-->
 <br />
-<div class="likes-section">
-
-  <div class="likes-counter">
-    <a><%= @post.likes.count %><strong> Likes</strong></a>
-  </div>
-
-  <div class="liking-functionality">
-    <% like = current_user.likes.find_by(likeable: @post) %>
-    <% if like.nil? %>
-
-      <%# button_to 'Like', likes_path, params: { like: { post_id: @post.id } }, method: :post %>
-
-      <form action="/likes" method="post">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <input type="hidden" name="like[likeable_id]" value="<%= @post.id %>">
-        <input type="hidden" name="like[likeable_type]" value="Post">
-        <input type="submit" value="Like">
-      </form>
-
-
-
-    <% else %>
-      <%= button_to 'Unlike', like_path(like), method: :delete %>
-    <% end %>
-  </div>
-
-</div>
+<%= render partial: 'likes/button', locals: {likeable: @post} %>
 
 <!-- COMMENT SECTION -->
 <br/>
